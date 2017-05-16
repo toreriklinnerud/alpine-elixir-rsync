@@ -1,12 +1,13 @@
 FROM bitwalker/alpine-elixir
 
+RUN chown default /opt/app/.mix
 RUN apk add --update --no-cache openssh rsync curl sudo
 
-COPY prepare_sshd.sh run_sshd.sh /root/
-RUN /root/prepare_sshd.sh
+COPY configure-sshd.sh docker-entrypoint.sh /usr/sbin/
+RUN configure-sshd.sh && rm /usr/sbin/configure-sshd.sh
 
 WORKDIR /opt/app
 
 EXPOSE 22
 
-ENTRYPOINT ["/root/run_sshd.sh"]
+ENTRYPOINT ["/usr/sbin/docker-entrypoint.sh"]
