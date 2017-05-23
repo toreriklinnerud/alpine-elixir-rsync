@@ -16,10 +16,11 @@ rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key && ssh-keygen -A
 
 # Set random passwords so no one can log in with passwords
 RANDOM_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-
 echo default:$RANDOM_PASSWORD | chpasswd
 echo root:$RANDOM_PASSWORD | chpasswd
 
+# Allow the default user to sudo
+echo 'default ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Fetch public keys from github
 mkdir -p $USER_SSH_DIRECTORY &&
