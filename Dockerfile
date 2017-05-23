@@ -8,6 +8,6 @@ RUN configure-sshd.sh && rm /usr/sbin/configure-sshd.sh
 
 WORKDIR /opt/app
 
-EXPOSE 22
+EXPOSE 2222
 
 ENTRYPOINT ["/usr/sbin/docker-entrypoint.sh"]
