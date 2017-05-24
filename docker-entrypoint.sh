@@ -30,5 +30,8 @@ chmod 700 $USER_SSH_DIRECTORY &&
 chmod 600 $USER_SSH_DIRECTORY/authorized_keys &&
 chown -R default $USER_SSH_DIRECTORY &&
 
+# Expose ENV variable to SSH user
+echo "export AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI" >> /etc/profile
+
 # Start sshd
 exec /usr/sbin/sshd -e -D
