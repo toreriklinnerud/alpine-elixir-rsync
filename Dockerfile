@@ -1,7 +1,7 @@
 FROM bitwalker/alpine-elixir
 
 RUN chown default /opt/app/.mix
-RUN apk add --update --no-cache openssh rsync curl sudo
+RUN apk add --update --no-cache openssh rsync curl sudo alpine-sdk
 
 COPY configure-sshd.sh docker-entrypoint.sh /usr/sbin/
 RUN configure-sshd.sh && rm /usr/sbin/configure-sshd.sh
